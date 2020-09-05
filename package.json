@@ -2,7 +2,6 @@
   "name": "parim-test-task",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://wozmx9dh26.execute-api.eu-west-1.amazonaws.com",
   "dependencies": {
     "@reduxjs/toolkit": "^1.4.0",
     "@testing-library/jest-dom": "^4.2.4",

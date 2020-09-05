@@ -27,7 +27,7 @@ const Week = () => {
   let prevStartDate = usePrevious(startDate);
 
   const endDate = moment(startDate).add(6, 'days').format(storageDateFormat);
-  const APIendpoint = `/api/holidays?`;
+  const APIendpoint = `https://wozmx9dh26.execute-api.eu-west-1.amazonaws.com/api/holidays?`;
   const requestData = {
     apiKey: `${process.env.REACT_APP_API_KEY}`,
     startDate,
