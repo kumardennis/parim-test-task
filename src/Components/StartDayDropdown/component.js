@@ -38,6 +38,7 @@ const StartDayDropwdown = () => {
 
       dispatch(updateCurrentDate(newDate));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [prevStartDay]);
 
   return (
