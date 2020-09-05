@@ -1,0 +1,27 @@
+@import '_variables.scss';
+
+header {
+  height: 174px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../../graphics/header-bg-01-01.png');
+  box-shadow: 0 0 10px black;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  @media (max-width: $mobile-viewport) {
+    background-image: url('../../graphics/mobile-header-bg-01-01.png');
+    background-position: center;
+  }
+
+  .header {
+    font-family: 'Courgette', cursive;
+    color: $content-color;
+    font-size: $header-font-size;
+
+    @media (max-width: $mobile-viewport) {
+      font-size: $mobile-header-font-size;
+    }
+  }
+}

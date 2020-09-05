@@ -1,0 +1,14 @@
+@import '_variables.scss';
+
+.inputs-container {
+  margin-top: 100px !important;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 20px auto;
+  flex-wrap: wrap;
+
+  @media (max-width: $mobile-viewport) {
+    width: 90%;
+    margin-top: 20px !important;
+  }
+}

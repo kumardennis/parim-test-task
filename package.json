@@ -2,12 +2,21 @@
   "name": "parim-test-task",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://wozmx9dh26.execute-api.eu-west-1.amazonaws.com",
   "dependencies": {
+    "@reduxjs/toolkit": "^1.4.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "mdbreact": "^4.27.0",
+    "moment": "^2.27.0",
+    "node-sass": "^4.14.1",
+    "prettier": "^2.0.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-redux": "^7.2.1",
     "react-scripts": "3.4.3"
   },
   "scripts": {

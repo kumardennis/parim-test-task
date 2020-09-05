@@ -1,0 +1,16 @@
+@import '_variables.scss';
+
+body {
+  background-image: url('./graphics/body-bg-01.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  font-family: 'Manjari', sans-serif;
+  font-size: $small-font-size;
+  height: 100vh;
+
+  @media (max-width: $mobile-viewport) {
+    background-image: url('./graphics/mobile-body-bg-01.png');
+    background-position: center;
+  }
+}

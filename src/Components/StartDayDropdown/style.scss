@@ -1,0 +1,31 @@
+@import '_variables.scss';
+
+.start-day-dropdown {
+  display: flex;
+  align-items: center;
+  width: max-content;
+
+  span {
+    font-family: 'Bebas Neue', cursive;
+    font-size: $medium-font-size;
+    padding: 5px;
+
+    @media (max-width: $mobile-viewport) {
+      font-size: $mobile-medium-font-size;
+    }
+  }
+
+  .dropdown {
+    width: 300px;
+  }
+
+  .dropdown-toggle {
+    padding: 20px 40px !important;
+    width: fit-content;
+    font-size: $medium-font-size;
+
+    @media (max-width: $mobile-viewport) {
+      font-size: $mobile-medium-font-size;
+    }
+  }
+}
