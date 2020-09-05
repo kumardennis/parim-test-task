@@ -5,7 +5,7 @@ const WeekNumber = ({weekNumber}) => {
   return (
     <MDBContainer>
       <MDBCard>
-        <MDBCardBody>
+        <MDBCardBody style={{textAlign: 'center'}}>
           Week: <span style={{fontSize: '40px'}}>{weekNumber}</span>
         </MDBCardBody>
       </MDBCard>

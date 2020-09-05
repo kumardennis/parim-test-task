@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem} from 'mdbreact';
+import {MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBIcon} from 'mdbreact';
 import {useSelector, useDispatch} from 'react-redux';
 import {updateStartDayOfWeek, updateCurrentDate} from 'Redux/actions/index';
 import moment from 'moment';
@@ -7,7 +7,7 @@ import moment from 'moment';
 import './style.scss';
 
 const StartDayDropwdown = () => {
-  const storageDateFormat = window !== undefined && window.$storageDateFormat;
+  const storageDateFormat = window !== undefined && window.$storageDateFormat; //Global Variable
 
   const [prevStartDay, setPrevStartDay] = useState(null);
 
@@ -51,13 +51,16 @@ const StartDayDropwdown = () => {
           {weekDayNames.map((weekday, key) => {
             return (
               <MDBDropdownItem
+                key={key}
                 onClick={() => {
                   setPrevStartDay(startDay);
                   dispatch(updateStartDayOfWeek(weekday));
                 }}
               >
                 {weekday === 'Saturday' || weekday === 'Sunday' ? (
-                  <strong>{weekday}</strong>
+                  <>
+                    {weekday} <MDBIcon far icon='grin-stars' />
+                  </>
                 ) : (
                   weekday
                 )}

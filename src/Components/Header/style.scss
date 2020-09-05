@@ -2,9 +2,11 @@
 
 header {
   height: 174px;
+  padding-top: 20px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  align-items: baseline;
   background-image: url('../../graphics/header-bg-01-01.png');
   box-shadow: 0 0 10px black;
   background-repeat: no-repeat;
@@ -13,6 +15,11 @@ header {
   @media (max-width: $mobile-viewport) {
     background-image: url('../../graphics/mobile-header-bg-01-01.png');
     background-position: center;
+  }
+
+  small {
+    font-family: 'Courgette', cursive;
+    color: $content-color;
   }
 
   .header {

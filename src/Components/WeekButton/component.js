@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import {useSelector, useDispatch} from 'react-redux';
@@ -6,15 +6,14 @@ import {updateCurrentDate} from 'Redux/actions/index';
 import './style.scss';
 
 const WeekButton = ({label, children}) => {
-  const storageDateFormat = window !== undefined && window.$storageDateFormat;
+  const storageDateFormat = window !== undefined && window.$storageDateFormat; //Global variable
 
   const dispatch = useDispatch();
+
   const currentDate = useSelector((state) => state.currentDateReducer.currentDate);
 
   const handleNavigation = (event) => {
     event.preventDefault();
-
-    // CHANGE THE DAMN FUCKNG STATE!!!!
 
     const updatedCurrentDate =
       label === 'Next Week'

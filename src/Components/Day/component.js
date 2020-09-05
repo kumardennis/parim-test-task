@@ -12,16 +12,22 @@ const Day = ({dayDate, events}) => {
       <div className='day-events'>
         <ul>
           {events.map((event, key) => {
-            if (event.type === 'no events') return <span className='no-events'>{event.name}</span>;
+            if (event.type === 'no events')
+              return (
+                <span key={key} className='no-events'>
+                  {event.name}
+                </span>
+              );
             return (
               <div
+                key={key}
                 className={
                   event.type === 'folk'
                     ? 'folk-event-item event-item-container'
                     : 'public-event-item event-item-container'
                 }
               >
-                <li key={key}>{event.name}</li>
+                <li>{event.name}</li>
                 <span>{event.type} holiday</span>
               </div>
             );

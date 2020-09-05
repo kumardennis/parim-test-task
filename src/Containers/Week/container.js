@@ -2,14 +2,16 @@ import React, {useEffect, useState, useRef} from 'react';
 import Day from 'Components/Day/component';
 import WeekNumber from 'Components/WeekNumber/component';
 import moment from 'moment';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector, useDispatch, useStore} from 'react-redux';
 import {addDateToLocalStore} from 'Redux/actions/index';
 import './style.scss';
 
 const Week = () => {
-  const storageDateFormat = window !== undefined && window.$storageDateFormat;
+  const storageDateFormat = window !== undefined && window.$storageDateFormat; //Global variable
 
   const dispatch = useDispatch();
+
+  const store = useStore();
 
   /*-------------------CUSTOM HOOK TO DETECT STATE CHANGE------- */
   const usePrevious = (value) => {
@@ -24,16 +26,13 @@ const Week = () => {
   const startDate = useSelector((state) => state.currentDateReducer.currentDate);
   let prevStartDate = usePrevious(startDate);
 
-  const endDate = moment(startDate).add(7, 'days').format(storageDateFormat);
+  const endDate = moment(startDate).add(6, 'days').format(storageDateFormat);
   const APIendpoint = `/api/holidays?`;
   const requestData = {
     apiKey: `${process.env.REACT_APP_API_KEY}`,
     startDate,
     endDate,
   };
-
-  // const locallyStoredStartDate = useSelector((state) => state.holidayReducer[startDate]);
-  // const locallyStoredEndDate = useSelector((state) => state.holidayReducer[endDate]);
 
   /*-------------FUNCTIONS TO MAP LOCAL GENERATED DATES WITH API HOLIDAYS-----TO GET CONSISTENT DATA PRODUCT-----------*/
   const [mappedHolidays, setMappedHolidays] = useState({});
@@ -45,7 +44,7 @@ const Week = () => {
 
     const dates = [];
 
-    while (moment(enumStartDate).isBefore(enumEndDate, 'day')) {
+    while (moment(enumStartDate).isSameOrBefore(enumEndDate, 'day')) {
       dates.push(moment(enumStartDate).format(storageDateFormat));
       enumStartDate = moment(enumStartDate).add(1, 'days');
     }
@@ -65,16 +64,22 @@ const Week = () => {
     return mappedDatesAndHolidays;
   };
 
-  /*-----------------------FETCH API ON STATE CHANGE AND CALL ABOVE FUNCTIONS TO GET SIMILAR DATA PRODUCT AS FROM API--------------------- */
+  /*-----------------------FETCH API AND CALL ABOVE FUNCTIONS TO GET CONSISTENT DATA PRODUCT--------------------- */
 
   useEffect(() => {
+    const locallyStoredHolidays = store.getState().holidayReducer;
+
     if (prevStartDate !== startDate || startDate === moment().format(storageDateFormat)) {
       fetch(APIendpoint, {
         method: 'POST',
         body: JSON.stringify(requestData),
       })
         .then((response) => response.json())
-        .then((data) => setMappedHolidays(mapDatesToHolidays(enumerateBetweenDates, data.holidays)))
+        .then((data) => {
+          startDate in locallyStoredHolidays && endDate in locallyStoredHolidays
+            ? setMappedHolidays(mapDatesToHolidays(enumerateBetweenDates, locallyStoredHolidays))
+            : setMappedHolidays(mapDatesToHolidays(enumerateBetweenDates, data.holidays));
+        })
         .then(() => dispatch(addDateToLocalStore(mappedHolidays)))
         .catch((err) => console.log('error', err));
     }
